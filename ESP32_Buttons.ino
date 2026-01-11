@@ -89,8 +89,8 @@ void setup() {
   loadSettings();
 
   for(int i=0; i<8; i++) {
-    pinMode(buttonPins[i], INPUT);
-    lastStates[i] = LOW;
+    pinMode(buttonPins[i], INPUT_PULLUP);
+    lastStates[i] = HIGH;
   }
 
   WiFi.mode(WIFI_AP_STA);
@@ -148,7 +148,7 @@ void loop() {
     if(val != lastStates[i]) {
       delay(25);
       if(digitalRead(buttonPins[i]) == val) {
-        int state = (val == HIGH) ? 1 : 0;
+        int state = (val == LOW) ? 1 : 0;
         
         // Вивід у Serial (EOL 13)
         Serial.print("b" + String(i+1) + "/" + String(state));
